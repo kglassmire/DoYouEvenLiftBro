@@ -1,0 +1,5 @@
+﻿-make updates as needed to models
+-cd into DAL directory (ForumSite.DAL)
+-ALSO MAKE SURE THE DROPDOWN IS POINTED AT DAL PROJECT (ForumSiteCore.DAL)
+-run PMC command for same thing as above (in this case -- Add-Migration {MigrationName})
+-run PMC command to update db (Update-Database)
