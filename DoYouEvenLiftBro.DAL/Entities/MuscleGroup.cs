@@ -9,6 +9,5 @@ namespace DoYouEvenLiftBro.DAL.Entities
         public string Name { get; set; }
 
         public User User { get; set; }
-
     }
 }

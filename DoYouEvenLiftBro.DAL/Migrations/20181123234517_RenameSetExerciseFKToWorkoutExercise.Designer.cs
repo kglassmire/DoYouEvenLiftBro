@@ -3,15 +3,17 @@ using System;
 using DoYouEvenLiftBro.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DoYouEvenLiftBro.DAL.Migrations
 {
     [DbContext(typeof(DoYouEvenLiftBroContext))]
-    partial class DoYouEvenLiftBroContextModelSnapshot : ModelSnapshot
+    [Migration("20181123234517_RenameSetExerciseFKToWorkoutExercise")]
+    partial class RenameSetExerciseFKToWorkoutExercise
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +34,6 @@ namespace DoYouEvenLiftBro.DAL.Migrations
                     b.Property<string>("Name")
                         .HasColumnName("name");
 
-                    b.Property<long?>("PrimaryMuscleGroupId")
-                        .HasColumnName("primary_muscle_group_id");
-
                     b.Property<long?>("UserId")
                         .HasColumnName("user_id");
 
@@ -44,9 +43,6 @@ namespace DoYouEvenLiftBro.DAL.Migrations
                     b.HasIndex("Name")
                         .IsUnique()
                         .HasName("ix_exercises_name");
-
-                    b.HasIndex("PrimaryMuscleGroupId")
-                        .HasName("ix_exercises_primary_muscle_group_id");
 
                     b.HasIndex("UserId")
                         .HasName("ix_exercises_user_id");
@@ -63,6 +59,9 @@ namespace DoYouEvenLiftBro.DAL.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnName("created");
 
+                    b.Property<long?>("ExerciseId")
+                        .HasColumnName("exercise_id");
+
                     b.Property<string>("Name")
                         .HasColumnName("name");
 
@@ -71,6 +70,9 @@ namespace DoYouEvenLiftBro.DAL.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_muscle_groups");
+
+                    b.HasIndex("ExerciseId")
+                        .HasName("ix_muscle_groups_exercise_id");
 
                     b.HasIndex("Name")
                         .IsUnique()
@@ -421,11 +423,6 @@ namespace DoYouEvenLiftBro.DAL.Migrations
 
             modelBuilder.Entity("DoYouEvenLiftBro.DAL.Entities.Exercise", b =>
                 {
-                    b.HasOne("DoYouEvenLiftBro.DAL.Entities.MuscleGroup", "PrimaryMuscleGroup")
-                        .WithMany()
-                        .HasForeignKey("PrimaryMuscleGroupId")
-                        .HasConstraintName("fk_exercises_muscle_groups_primary_muscle_group_id");
-
                     b.HasOne("DoYouEvenLiftBro.DAL.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -434,6 +431,11 @@ namespace DoYouEvenLiftBro.DAL.Migrations
 
             modelBuilder.Entity("DoYouEvenLiftBro.DAL.Entities.MuscleGroup", b =>
                 {
+                    b.HasOne("DoYouEvenLiftBro.DAL.Entities.Exercise")
+                        .WithMany("MuscleGroups")
+                        .HasForeignKey("ExerciseId")
+                        .HasConstraintName("fk_muscle_groups_exercises_exercise_id");
+
                     b.HasOne("DoYouEvenLiftBro.DAL.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")

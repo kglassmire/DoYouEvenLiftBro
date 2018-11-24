@@ -6,9 +6,9 @@ namespace DoYouEvenLiftBro.DAL.Entities
 {
     public class Exercise : BaseEntity
     {
-        public string Name { get; set; }        
-
+        public String Name { get; set; }
+        
         public User User { get; set; }
-        public List<MuscleGroup> MuscleGroups { get; set; }
+        public MuscleGroup PrimaryMuscleGroup { get; set; }
     }
 }
