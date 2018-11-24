@@ -7,6 +7,6 @@ namespace DoYouEvenLiftBro.DAL.Entities
     public class Set : BaseEntity
     {        
         public WorkoutExercise WorkoutExercise { get; set; }
-        public List<Rep> Reps { get; set; }
+        public List<RepGroup> RepGroups { get; set; }
     }
 }

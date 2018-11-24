@@ -12,10 +12,12 @@ namespace DoYouEvenLiftBro
     public static class SeedData
     {
 
-        private const string _adminUsername = "terrycrews";
+        private const string _adminUsername = "admin";
+        private const string _adminRolename = "admin";
         private static User _adminUser;
         public static void Initialize(DoYouEvenLiftBroContext context, UserManager<User> userManager, RoleManager<Role> roleManager)
-        {            
+        {
+            //Console.WriteLine("Initialized DB.");
             context.Database.EnsureCreated();
             SeedRoles(roleManager);
             SeedUsers(userManager, roleManager);
@@ -23,12 +25,18 @@ namespace DoYouEvenLiftBro
             SeedMuscleGroups(context);
             SeedExercises(context);
             SeedWorkouts(context);
+            SeedWorkoutExercises(context);
 
+        }
+
+        private static void SeedWorkoutExercises(DoYouEvenLiftBroContext context)
+        {
+            
         }
 
         private static void SeedWorkouts(DoYouEvenLiftBroContext context)
         {
-            User testUser = context.Users.Single(x => x.UserName.Equals("kglassmire"));
+            User testUser = context.Users.Single(x => x.UserName.Equals("admin"));
             Workout[] workouts = new Workout[]
             {
                 new Workout { Name = "Friday, January 12, 2018", Date = new DateTimeOffset(new DateTime(2018, 1, 12, 0, 0, 0)), User = testUser },
@@ -132,7 +140,13 @@ namespace DoYouEvenLiftBro
                 new Workout { Name = "Wednesday, November 21, 2018", Date = new DateTimeOffset(new DateTime(2018, 11, 21, 0, 0, 0)), User = testUser },
             };
 
-            context.Workouts.AddRange(workouts);
+            foreach (var workout in workouts)
+            {
+                if (context.Workouts.SingleOrDefault(x => x.Name.Equals(workout.Name) && x.User.UserName.Equals(testUser.UserName)) == null)
+                    context.Workouts.Add(workout);
+            }
+            
+            context.SaveChanges();
         }
 
         private static void SeedExercises(DoYouEvenLiftBroContext context)
@@ -214,13 +228,25 @@ namespace DoYouEvenLiftBro
 
             };
 
-            context.Exercises.AddRange(exercises);
-            
+            foreach (var exercise in exercises)
+            {                
+                if (context.Exercises.SingleOrDefault(x => x.Name.Equals(exercise.Name)) == null)
+                    context.Exercises.Add(exercise);
+            }
+                        
+            context.SaveChanges();            
         }
 
         private static void GetAdminUser(UserManager<User> userManager)
         {
             _adminUser = userManager.FindByNameAsync(_adminUsername).Result;
+            if (_adminUser != null)
+            {
+                if (!userManager.IsInRoleAsync(_adminUser, _adminRolename).Result)
+                {
+                    var identityResult = userManager.AddToRoleAsync(_adminUser, _adminRolename).Result;
+                }
+            }
         }
 
         private static void SeedMuscleGroups(DoYouEvenLiftBroContext context)
@@ -242,7 +268,11 @@ namespace DoYouEvenLiftBro
                 new MuscleGroup { Name = "Glutes", User = _adminUser }
             };
 
-            context.MuscleGroups.AddRange(muscleGroups);
+            foreach (var muscleGroup in muscleGroups)
+                if (context.MuscleGroups.SingleOrDefault(x => x.Name.Equals(muscleGroup.Name)) == null)
+                    context.MuscleGroups.Add(muscleGroup);
+
+            context.SaveChanges();
         }
 
         public static void SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
@@ -270,7 +300,8 @@ namespace DoYouEvenLiftBro
 
             foreach (var user in users)
             {
-                userManager.CreateAsync(user, "3fvu3nRPVs6P4V0KWlO9");
+                if (userManager.FindByNameAsync(user.UserName).Result == null)
+                    userManager.CreateAsync(user, "@3fvu3nRPVs6P4V0KWlO9");
             }
         }
 
@@ -283,7 +314,8 @@ namespace DoYouEvenLiftBro
 
             foreach (var role in roles)
             {
-                roleManager.CreateAsync(role);
+                if (!roleManager.RoleExistsAsync(role.Name).Result)
+                    roleManager.CreateAsync(role);
             }
         }
     }

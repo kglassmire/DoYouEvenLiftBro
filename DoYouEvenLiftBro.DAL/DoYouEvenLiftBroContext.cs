@@ -11,9 +11,8 @@ namespace DoYouEvenLiftBro.DAL
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
         public DbSet<MuscleGroup> MuscleGroups { get; set; }
-        public DbSet<Rep> Reps { get; set; }
+        public DbSet<RepGroup> RepGroup { get; set; }
         public DbSet<Set> Sets { get; set; }
-        public DbSet<RepType> RepTypes { get; set; }
         public DbSet<Workout> Workouts { get; set; }
 
         public DoYouEvenLiftBroContext(DbContextOptions<DoYouEvenLiftBroContext> options) : base(options) { }
@@ -26,7 +25,9 @@ namespace DoYouEvenLiftBro.DAL
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.HasPostgresExtension("citext");
-            builder.Entity<Exercise>().HasIndex(x => x.Name).IsUnique();
+
+            
+            builder.Entity<Exercise>().HasIndex(x => x.Name).IsUnique();            
             builder.Entity<MuscleGroup>().HasIndex(x => x.Name).IsUnique();            
 
             foreach (var entity in builder.Model.GetEntityTypes())
@@ -57,6 +58,13 @@ namespace DoYouEvenLiftBro.DAL
             }
         }
 
+
+        public override int SaveChanges()
+        {
+            AddAuditInformation();
+            return base.SaveChanges();
+        }
+
         private void AddAuditInformation()
         {
             var entries = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
@@ -64,9 +72,8 @@ namespace DoYouEvenLiftBro.DAL
             {
                 if (entry.State == EntityState.Added)
                 {
-                    ((BaseEntity)entry.Entity).Created = DateTime.UtcNow;                    
-                }
-                
+                    ((BaseEntity)entry.Entity).Created = DateTimeOffset.Now;                    
+                }                
             }
         }
     }

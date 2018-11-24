@@ -64,10 +64,12 @@ namespace DoYouEvenLiftBro
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager, RoleManager<Role> roleManager, DoYouEvenLiftBroContext context)
         {
+            
             if (env.IsDevelopment())
             {
+                SeedData.Initialize(context, userManager, roleManager);
                 app.UseDeveloperExceptionPage();
             }
             else
