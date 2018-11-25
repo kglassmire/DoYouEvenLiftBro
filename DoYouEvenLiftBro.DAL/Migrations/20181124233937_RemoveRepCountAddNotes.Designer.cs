@@ -3,15 +3,17 @@ using System;
 using DoYouEvenLiftBro.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DoYouEvenLiftBro.DAL.Migrations
 {
     [DbContext(typeof(DoYouEvenLiftBroContext))]
-    partial class DoYouEvenLiftBroContextModelSnapshot : ModelSnapshot
+    [Migration("20181124233937_RemoveRepCountAddNotes")]
+    partial class RemoveRepCountAddNotes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,9 +126,6 @@ namespace DoYouEvenLiftBro.DAL.Migrations
 
                     b.Property<int>("Reps")
                         .HasColumnName("reps");
-
-                    b.Property<decimal>("Weight")
-                        .HasColumnName("weight");
 
                     b.Property<long?>("WorkoutExerciseId")
                         .HasColumnName("workout_exercise_id");

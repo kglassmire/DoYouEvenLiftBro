@@ -8,6 +8,8 @@ namespace DoYouEvenLiftBro.DAL.Entities
     {
         public string Name { get; set; }
         public DateTimeOffset Date { get; set; }
+        public string Notes { get; set; }
+        
         public List<WorkoutExercise> WorkoutExercises { get; set; }
         public User User { get; set; }
     }

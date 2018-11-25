@@ -8,6 +8,9 @@
     <Compile Remove="Migrations\20181123233745_ChangeExerciseToWorkoutExerciseAndAddExercise.cs" />
     <Compile Remove="Migrations\20181123233905_RenameExerciseToWorkoutExerciseAndAddExercise.cs" />
     <Compile Remove="Migrations\20181124151702_RenameExerciseToWorkoutExercise.cs" />
+    <Compile Remove="Migrations\20181125013555_AddUniqueIndexToWorkoutExercise.cs" />
+    <Compile Remove="Migrations\20181125013624_AddUniqueIndexToWorkoutExercise.cs" />
+    <Compile Remove="Migrations\20181125013712_AddUniqueIndexToWorkoutExercise.cs" />
   </ItemGroup>
 
   <ItemGroup>

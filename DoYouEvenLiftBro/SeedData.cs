@@ -31,7 +31,54 @@ namespace DoYouEvenLiftBro
 
         private static void SeedWorkoutExercises(DoYouEvenLiftBroContext context)
         {
-            
+            Workout workout = null;
+            WorkoutExercise workoutExercise = null;
+
+            workout = context.Workouts.Single(x => x.Date.Equals(new DateTimeOffset(new DateTime(2018, 1, 12))));
+
+            workoutExercise = new WorkoutExercise { Workout = workout, Name = "Flat Barbell Bench Press", Exercise = context.Exercises.Single(x => x.Name.Equals("Flat Barbell Bench Press")) };
+            context.WorkoutExercises.Add(workoutExercise);
+            workoutExercise.Sets = new List<Set>
+            {
+                new Set { Reps = 8, Weight = 185 },
+                new Set { Reps = 7, Weight = 225 },
+                new Set { Reps = 6, Weight = 255 },
+                new Set { Reps = 7, Weight = 225 },
+                new Set { Reps = 7, Weight = 225 },
+                new Set { Reps = 8, Weight = 185 },
+            };
+
+            workoutExercise = new WorkoutExercise { Workout = workout, Name = "Cable Crossovers", Exercise = context.Exercises.Single(x => x.Name.Equals("Cable Crossovers")) };
+            context.WorkoutExercises.Add(workoutExercise);
+            workoutExercise.Sets = new List<Set>
+            {
+                new Set { Reps = 15, Weight = 25 },
+                new Set { Reps = 12, Weight = 30 },
+                new Set { Reps = 12, Weight = 30 },
+                new Set { Reps = 13, Weight = 25 },
+            };
+
+            workoutExercise = new WorkoutExercise { Workout = workout, Name = "Decline Hammer Strength Chest Press", Exercise = context.Exercises.Single(x => x.Name.Equals("Decline Hammer Strength Chest Press")) };
+            context.WorkoutExercises.Add(workoutExercise);
+            workoutExercise.Sets = new List<Set>           
+            {
+                new Set { Reps = 12, Weight = 186 },
+                new Set { Reps = 10, Weight = 206 },
+                new Set { Reps = 10, Weight = 226 },
+                new Set { Reps = 10, Weight = 186 },
+            };
+
+            workoutExercise = new WorkoutExercise { Workout = workout, Name = "Single Arm Cable Triceps Extension", Exercise = context.Exercises.Single(x => x.Name.Equals("Single Arm Cable Triceps Extension")) };
+            context.WorkoutExercises.Add(workoutExercise);
+            workoutExercise.Sets = new List<Set>
+            {
+                new Set { Reps = 12, Weight = 20 },
+                new Set { Reps = 12, Weight = 20 },
+                new Set { Reps = 12, Weight = 20 },
+                new Set { Reps = 12, Weight = 15 },
+            };
+
+            context.SaveChanges();
         }
 
         private static void SeedWorkouts(DoYouEvenLiftBroContext context)
@@ -222,6 +269,7 @@ namespace DoYouEvenLiftBro
                 new Exercise { Name = "Dips", User = _adminUser, PrimaryMuscleGroup = triceps },
                 new Exercise { Name = "Skullcrushers", User = _adminUser, PrimaryMuscleGroup = triceps },
                 new Exercise { Name = "Close Grip Bench Press", User = _adminUser, PrimaryMuscleGroup = triceps },
+                new Exercise { Name = "Single Arm Cable Triceps Extension", User = _adminUser, PrimaryMuscleGroup = triceps },
 
                 new Exercise { Name = "Good Mornings", User = _adminUser, PrimaryMuscleGroup = lowerBack },
                 new Exercise { Name = "Hyperextensions", User = _adminUser, PrimaryMuscleGroup = lowerBack },

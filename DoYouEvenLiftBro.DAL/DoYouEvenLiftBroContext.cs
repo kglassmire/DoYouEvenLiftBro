@@ -11,7 +11,6 @@ namespace DoYouEvenLiftBro.DAL
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
         public DbSet<MuscleGroup> MuscleGroups { get; set; }
-        public DbSet<RepGroup> RepGroup { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<Workout> Workouts { get; set; }
 
@@ -27,8 +26,8 @@ namespace DoYouEvenLiftBro.DAL
             builder.HasPostgresExtension("citext");
 
             
-            builder.Entity<Exercise>().HasIndex(x => x.Name).IsUnique();            
-            builder.Entity<MuscleGroup>().HasIndex(x => x.Name).IsUnique();            
+            builder.Entity<Exercise>().HasIndex(x => x.Name).IsUnique();
+            builder.Entity<MuscleGroup>().HasIndex(x => x.Name).IsUnique();
 
             foreach (var entity in builder.Model.GetEntityTypes())
             {
