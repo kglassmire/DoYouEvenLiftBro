@@ -1,0 +1,9 @@
+<mat-nav-list>
+    <a mat-list-item routerLink="."><mat-icon fontSet="fa" fontIcon="fa-home"></mat-icon>Home</a>    
+    <a mat-list-item routerLink="/workouts"><mat-icon fontSet="fa" fontIcon="fa-dumbbell"></mat-icon>Workouts</a>
+    <a mat-list-item routerLink="/exercises"><mat-icon fontSet="fa" fontIcon="fa-book"></mat-icon>Exercises</a>
+    <a mat-list-item routerLink="/friends"><mat-icon fontSet="fa" fontIcon="fa-user-friends"></mat-icon>Friends</a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/settings"><mat-icon fontSet="fa" fontIcon="fa-cog"></mat-icon>Settings</a>
+    <a mat-list-item routerLink="/login"><mat-icon fontSet="fa" fontIcon="fa-sign-in-alt"></mat-icon>{{ loginMenuOption() }}</a>
+  </mat-nav-list>

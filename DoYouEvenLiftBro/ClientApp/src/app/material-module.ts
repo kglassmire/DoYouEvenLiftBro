@@ -2,9 +2,13 @@
 import {NgModule} from '@angular/core';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule,  
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatListModule,
+  MatOptionModule,
+  MatSelectModule,
   MatSidenavModule,
   MatTabsModule,
   MatToolbarModule
@@ -12,13 +16,18 @@ import {
 
 @NgModule({
   exports: [
-    MatCardModule,
-    MatTabsModule,
     MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
     MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
+    MatInputModule,
+    MatTabsModule,
     MatListModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatToolbarModule
   ]
 })
 export class DoYouEvenLiftBroMaterialModule {

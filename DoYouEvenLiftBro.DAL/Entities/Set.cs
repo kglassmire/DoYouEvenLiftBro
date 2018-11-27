@@ -8,6 +8,8 @@ namespace DoYouEvenLiftBro.DAL.Entities
     {        
         public WorkoutExercise WorkoutExercise { get; set; }
         public int Reps { get; set; }
+        public int SequenceNum { get; set; }
+
         public decimal Weight { get; set; }
         public string Notes { get; set; }
     }

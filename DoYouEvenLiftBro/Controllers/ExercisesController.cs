@@ -7,13 +7,11 @@ using DoYouEvenLiftBro.DAL;
 using DoYouEvenLiftBro.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.EntityFrameworkCore;
 
 namespace DoYouEvenLiftBro.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     public class ExercisesController : Controller
     {
         private DoYouEvenLiftBroContext _dbContext;

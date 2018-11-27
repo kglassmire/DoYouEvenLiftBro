@@ -3,15 +3,17 @@ using System;
 using DoYouEvenLiftBro.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DoYouEvenLiftBro.DAL.Migrations
 {
     [DbContext(typeof(DoYouEvenLiftBroContext))]
-    partial class DoYouEvenLiftBroContextModelSnapshot : ModelSnapshot
+    [Migration("20181125235920_RenameDateToWorkoutDate")]
+    partial class RenameDateToWorkoutDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

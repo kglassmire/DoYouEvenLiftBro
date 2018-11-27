@@ -7,6 +7,7 @@ namespace DoYouEvenLiftBro.DAL.Entities
     public class WorkoutExercise : BaseEntity
     {
         public string Name { get; set; }
+        public int SequenceNum { get; set; }
 
         public Exercise Exercise { get; set; }    
         public Workout Workout { get; set; }

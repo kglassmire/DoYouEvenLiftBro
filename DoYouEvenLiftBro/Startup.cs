@@ -53,7 +53,7 @@ namespace DoYouEvenLiftBro
             });
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.HttpOnly = true;
+                options.Cookie.HttpOnly = false;
                 //options.Cookie.Expiration = TimeSpan.FromDays(150);
                 //options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
                 //options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
@@ -69,6 +69,7 @@ namespace DoYouEvenLiftBro
             
             if (env.IsDevelopment())
             {
+                // UNCOMMENT TO SEED DB!
                 SeedData.Initialize(context, userManager, roleManager);
                 app.UseDeveloperExceptionPage();
             }

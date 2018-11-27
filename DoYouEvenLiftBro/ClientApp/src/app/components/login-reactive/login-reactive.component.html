@@ -1,0 +1,51 @@
+<!-- 
+<div class="login-form-container">
+    <div *ngIf="!isAuthenticated(); else logoutBlock">
+        <div>{{loginFailureMessage}}</div>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <mat-form-field>
+                <input matInput type="text" formControlName="userName" class="form-control" placeholder="Username" required>                
+                    <div *ngIf="loginForm.controls['userName'].errors && !loginForm.controls['userName'].pristine" class="alert alert-danger">
+                    <div [hidden]="!loginForm.controls['userName'].errors.required">UserName is required.</div>
+                </div>
+            </mat-form-field>        
+            <mat-form-field>
+                <input matInput type="password" formControlName="password" placeholder="Password" required>
+                    <div *ngIf="loginForm.controls['password'].errors && !loginForm.controls['password'].pristine" class="alert alert-danger">
+                    <div [hidden]="!loginForm.controls['password'].errors.required">Password is required.</div>
+                </div>
+            </mat-form-field>    
+            <button mat-raised-button [disabled]="loginForm.invalid" color="primary" type="submit" >Login</button>
+        </form>            
+    </div>
+    <ng-template #logoutBlock> 
+        <button class="btn btn-info btn-lg btn-block" (click)="logout()">Logout</button>
+    </ng-template>
+</div>
+
+
+ -->
+
+
+    <div *ngIf="!isAuthenticated(); else logoutBlock">
+        <form [formGroup]='loginForm' (ngSubmit)="login()">
+            <div class="login-form-container">
+                <mat-form-field>
+                    <input type="text" matInput formControlName="formUserName" placeholder="Username" required>
+                    <mat-error *ngIf="formUserName.errors?.required">Username is required.</mat-error>
+                </mat-form-field>  
+                <mat-form-field>
+                    <input type="password" matInput formControlName="formPassword" placeholder="Password" required>
+                    <mat-error *ngIf="formPassword.errors?.required">Username is required.</mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="accent" type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-lg btn-block">Login</button>
+            </div>
+        </form>
+    </div>
+    <ng-template #logoutBlock>
+        <div class="login-form-container">
+            <button mat-raised-button color="accent" (click)="logout()" class="btn btn-primary btn-lg btn-block">Logout</button>
+        </div>         
+    </ng-template>
+
+

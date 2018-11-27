@@ -3,15 +3,17 @@ using System;
 using DoYouEvenLiftBro.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DoYouEvenLiftBro.DAL.Migrations
 {
     [DbContext(typeof(DoYouEvenLiftBroContext))]
-    partial class DoYouEvenLiftBroContextModelSnapshot : ModelSnapshot
+    [Migration("20181125235551_AddOrderColumns")]
+    partial class AddOrderColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,6 +220,9 @@ namespace DoYouEvenLiftBro.DAL.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnName("created");
 
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnName("date");
+
                     b.Property<string>("Name")
                         .HasColumnName("name");
 
@@ -226,9 +231,6 @@ namespace DoYouEvenLiftBro.DAL.Migrations
 
                     b.Property<long?>("UserId")
                         .HasColumnName("user_id");
-
-                    b.Property<DateTimeOffset>("WorkoutDate")
-                        .HasColumnName("workout_date");
 
                     b.HasKey("Id")
                         .HasName("pk_workouts");
